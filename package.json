@@ -1,0 +1,23 @@
+{
+  "name": "readit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpookyCorridor/readit.git"
+  },
+  "author": "Dylan Cairns <spookycorridor@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpookyCorridor/readit/issues"
+  },
+  "homepage": "https://github.com/SpookyCorridor/readit#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  }
+}
