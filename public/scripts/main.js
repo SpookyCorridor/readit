@@ -61,42 +61,74 @@ var Post = React.createClass({
 var CommentList = React.createClass({
 	
 	render: function() { 
-		var current_parent = 't1'; 
-		var that = this; 
-		var sorted_comments = _.sortBy(this.props.data, 'depth');
-		var com = []; 
-		for (var comment in sorted_comments) {
-  		if (current_parent === sorted_comments[comment].parentid) {		
-    		com.push(sorted_comments[comment]); 
-  		}
-  		current_parent = sorted_comments[comment].id; 
-		}
-		
-		return (
-			<Comment list={com}>
-				
-			</Comment> 
-		);
-	}
+    
+    var a = _.filter(this.props.data, function(com) {
+       return com.depth === '1'; 
+    });
+
+    var that = this; 
+
+    var subComments = [];
+
+    var commentNodes = a.map(function(comment, index) {
+    	
+      return (
+        <Comment data={that.props.data} actions={that.props.actions} author={comment.author} body={comment.text} key={index} id={comment.id} subComments={subComments} parentid={comment.parentid}>
+          {comment.text}
+        </Comment>
+      );
+    });
+
+    return (
+      <div className="commentList">
+        {commentNodes}
+      </div>
+    );
+  }
 });
 
 var Comment = React.createClass({
-  render: function() {
-  	var list = this.props.list;
-  	console.log(list);
-  	var hold = {}; 
+  render: function() { 
+  	var comments = this.props.data; 
+  	var that = this; 
 
+  	var replies = _.filter(comments, function(replies) {
+  		return replies.parentid === that.props.id; 
+  	});
+
+  	console.log(replies); 
     return (
-    	<div>
-    	{list.author}
+    	<div className="comment">
+    		<h1>{this.props.author}</h1>
+    		<CommentReplies data={this.props.data} replies={replies} />
+    		<CommentForm actions={this.props.actions} parentid={this.props.id} parentdepth={this.props.depth}></CommentForm>
     	</div> 
     )
     	
-   
-    
     
   }
 });
+
+var CommentReplies = React.createClass({
+	render: function() {
+		var replyList = this.props.replies; 
+		var display = [];
+		var replies = _.map(replyList, function(reply) {
+			console.log(reply);
+			return reply; 
+		})
+		console.log(replies + '*****');
+
+		var test = Object.keys(replies).map(function(rep) {
+			display.push(<li key={replies[rep].id}>{replies[rep].author}</li>)
+		});
+
+		return (
+			<div> {display } </div> 
+		)
+		
+	}
+})
 
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
