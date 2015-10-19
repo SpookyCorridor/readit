@@ -59,22 +59,22 @@ var Post = React.createClass({
 });
 
 var CommentList = React.createClass({
-
 	
 	render: function() { 
+		var current_parent = 't1'; 
 		var that = this; 
+		var sorted_comments = _.sortBy(this.props.data, 'depth');
 		var com = []; 
 		for (var comment in sorted_comments) {
   		if (current_parent === sorted_comments[comment].parentid) {		
     		com.push(sorted_comments[comment]); 
   		}
   		current_parent = sorted_comments[comment].id; 
-  		console.log(current_parent)
 		}
 		
 		return (
-			<Comment author={comment.author} body={comment.text} key={index} id={comment.id} parentid={comment.parentid} actions={that.props.actions}>
-				{comment.text}
+			<Comment list={com}>
+				
 			</Comment> 
 		);
 	}
@@ -82,16 +82,19 @@ var CommentList = React.createClass({
 
 var Comment = React.createClass({
   render: function() {
+  	var list = this.props.list;
+  	console.log(list);
+  	var hold = {}; 
+
     return (
-      <div className="comment">
-          <h4 className="commentAuthor">
-            {this.props.author}
-          </h4>
-          <span> {this.props.body} </span> 
-          <li> {this.props.subComments} </li> 
-          <CommentForm actions={this.props.actions} parentid={this.props.id} parentdepth={this.props.depth}></CommentForm> 
-      </div>     
-    );
+    	<div>
+    	{list.author}
+    	</div> 
+    )
+    	
+   
+    
+    
   }
 });
 
@@ -123,6 +126,6 @@ var CommentForm = React.createClass({
 });
 
 ReactDOM.render(
-  <Post url="/api/comments" pollInterval={3000} />,
+  <Post url="/api/comments" pollInterval={6000} />,
   document.getElementById('content')
 ); 

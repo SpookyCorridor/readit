@@ -1,9 +1,44 @@
 [
-  {
-      "author": "Post Author",
-      "text": "Howdy, this is the top-level post",
-      "id": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
-      "parentid": "t1",
-      "depth": "1"
-  }
+    {
+        "author": "Pete Hunt",
+        "text": "Hey there!",
+        "id": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
+        "parentid": "t1",
+        "depth": "1"
+    },
+    {
+        "author": "not pete",
+        "text": "yo pete",
+        "id": "3be17174-8851-d804-0f38-157eb4547a01",
+        "parentid": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
+        "depth": "2"
+    },
+    {
+        "author": "second not pete",
+        "text": "yo not pete",
+        "id": "82fd852a-d815-bba8-cda2-db3cd45a16fc",
+        "parentid": "3be17174-8851-d804-0f38-157eb4547a01",
+        "depth": "3"
+    },
+    {
+        "author": "third not pete",
+        "text": "this should have original id",
+        "id": "02b467ab-4e38-0895-838b-8a167da4fa75",
+        "parentid": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
+        "depth": "2"
+    },
+    {
+        "author": "one",
+        "text": "one",
+        "id": "b359ab16-b8cb-184b-2511-99fd62e81a0d",
+        "parentid": "02b467ab-4e38-0895-838b-8a167da4fa75",
+        "depth": "3"
+    },
+    {
+        "author": "hey one",
+        "text": "this is two",
+        "id": "9bdabc7e-9d04-c393-665c-5956031d5d0a",
+        "parentid": "b359ab16-b8cb-184b-2511-99fd62e81a0d",
+        "depth": "4"
+    }
 ]
