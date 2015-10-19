@@ -24,8 +24,8 @@ var Post = React.createClass({
 		});
 	},
 	handleCommentSubmit: function(comment) {
-    var comments = this.state.data;
-    var newComments = comments.concat([comment]);
+    const comments = this.state.data;
+    const newComments = comments.concat([comment]);
     this.setState({data: newComments});
     $.ajax({
       url: this.props.url,
@@ -48,7 +48,7 @@ var Post = React.createClass({
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
-    var actions = this.handleCommentSubmit; 
+    const actions = this.handleCommentSubmit; 
     return (
       <div className="post">
         <h1>Comments</h1>
@@ -62,15 +62,15 @@ var CommentList = React.createClass({
 	
 	render: function() { 
     
-    var a = _.filter(this.props.data, function(com) {
+    const a = _.filter(this.props.data, (com) => {
        return com.depth === '1'; 
     });
 
-    var that = this; 
+    const that = this; 
 
-    var subComments = [];
+    let subComments = [];
 
-    var commentNodes = a.map(function(comment, index) {
+    const commentNodes = a.map((comment, index) => {
     	
       return (
         <Comment data={that.props.data} actions={that.props.actions} author={comment.author} body={comment.text} key={index} depth={comment.depth} id={comment.id} subComments={subComments} parentid={comment.parentid}>
@@ -89,10 +89,10 @@ var CommentList = React.createClass({
 
 var Comment = React.createClass({
   render: function() { 
-  	var comments = this.props.data; 
-  	var that = this; 
+  	const comments = this.props.data; 
+  	const that = this; 
 
-  	var replies = _.filter(comments, function(replies) {
+  	const replies = _.filter(comments, (replies) => {
   		return replies.parentid === that.props.id; 
   	});
 
@@ -112,16 +112,16 @@ var Comment = React.createClass({
 
 var CommentReplies = React.createClass({
 	render: function() {
-		var that = this; 
-		var replyList = this.props.replies; 
-		var display = [];
-		var replies = _.map(replyList, function(reply) {
+		const that = this; 
+		const replyList = this.props.replies; 
+		let display = [];
+		const replies = _.map(replyList, (reply) => {
 			console.log(reply);
 			return reply; 
 		})
 		console.log(replies + '*****');
 
-		var test = Object.keys(replies).map(function(rep) {
+		Object.keys(replies).map((rep) => {
 			display.push(<li key={replies[rep].id} id={replies[rep].id} depth={replies[rep].depth}>{replies[rep].author} <CommentForm actions={that.props.actions} parentid={replies[rep].id} parentdepth={replies[rep].depth}></CommentForm></li>)
 		});
 
@@ -138,11 +138,11 @@ var CommentReplies = React.createClass({
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = this.refs.author.value.trim();
-    var text = this.refs.text.value.trim();
-    var id = generate(); 
-    var parentid = this.props.parentid;
-    var depth = (parseInt(this.props.parentdepth) + 1) || 1; 
+    const author = this.refs.author.value.trim();
+    const text = this.refs.text.value.trim();
+    const id = generate(); 
+    const parentid = this.props.parentid;
+    const depth = (parseInt(this.props.parentdepth) + 1) || 1; 
 
     if (!text || !author) {
       return;

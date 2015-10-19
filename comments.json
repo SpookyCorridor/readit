@@ -42,10 +42,17 @@
         "depth": "4"
     },
     {
-        "author": "test",
-        "text": "test",
-        "id": "5b90f142-cf8c-b887-6d1b-765eae688140",
-        "parentid": "3be17174-8851-d804-0f38-157eb4547a01",
-        "depth": "3"
+        "author": "es6 test",
+        "text": "es6 test",
+        "id": "10ca826a-0a2a-fded-eca1-f909b8f748a5",
+        "parentid": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
+        "depth": "2"
+    },
+    {
+        "author": "hey this is a new",
+        "text": "comment",
+        "id": "87c9625a-0407-c011-2e69-dbf58e0a00cf",
+        "parentid": "01fcca6a-f617-3f91-3a02-8a59d833fdf9",
+        "depth": "2"
     }
 ]
