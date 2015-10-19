@@ -73,7 +73,7 @@ var CommentList = React.createClass({
     var commentNodes = a.map(function(comment, index) {
     	
       return (
-        <Comment data={that.props.data} actions={that.props.actions} author={comment.author} body={comment.text} key={index} id={comment.id} subComments={subComments} parentid={comment.parentid}>
+        <Comment data={that.props.data} actions={that.props.actions} author={comment.author} body={comment.text} key={index} depth={comment.depth} id={comment.id} subComments={subComments} parentid={comment.parentid}>
           {comment.text}
         </Comment>
       );
@@ -100,7 +100,8 @@ var Comment = React.createClass({
     return (
     	<div className="comment">
     		<h1>{this.props.author}</h1>
-    		<CommentReplies data={this.props.data} replies={replies} />
+    		<CommentReplies data={this.props.data} replies={replies} actions={this.props.actions} />
+    		<hr /> 
     		<CommentForm actions={this.props.actions} parentid={this.props.id} parentdepth={this.props.depth}></CommentForm>
     	</div> 
     )
@@ -111,6 +112,7 @@ var Comment = React.createClass({
 
 var CommentReplies = React.createClass({
 	render: function() {
+		var that = this; 
 		var replyList = this.props.replies; 
 		var display = [];
 		var replies = _.map(replyList, function(reply) {
@@ -120,11 +122,14 @@ var CommentReplies = React.createClass({
 		console.log(replies + '*****');
 
 		var test = Object.keys(replies).map(function(rep) {
-			display.push(<li key={replies[rep].id}>{replies[rep].author}</li>)
+			display.push(<li key={replies[rep].id} id={replies[rep].id} depth={replies[rep].depth}>{replies[rep].author} <CommentForm actions={that.props.actions} parentid={replies[rep].id} parentdepth={replies[rep].depth}></CommentForm></li>)
 		});
 
 		return (
-			<div> {display } </div> 
+			<div>
+
+			 {display} 
+			</div> 
 		)
 		
 	}
@@ -136,7 +141,7 @@ var CommentForm = React.createClass({
     var author = this.refs.author.value.trim();
     var text = this.refs.text.value.trim();
     var id = generate(); 
-    var parentid = this.props.parentid || null; 
+    var parentid = this.props.parentid;
     var depth = (parseInt(this.props.parentdepth) + 1) || 1; 
 
     if (!text || !author) {
