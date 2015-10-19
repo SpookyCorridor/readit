@@ -94,3 +94,35 @@ var Comment = React.createClass({
     );
   }
 });
+
+var CommentForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var author = this.refs.author.value.trim();
+    var text = this.refs.text.value.trim();
+    var id = generate(); 
+    var parentid = this.props.parentid || null; 
+    var depth = (parseInt(this.props.parentdepth) + 1) || 1; 
+
+    if (!text || !author) {
+      return;
+    }
+    this.props.actions({author: author, text: text, id: id, parentid: parentid, depth: depth});
+    this.refs.author.value = '';
+    this.refs.text.value = '';
+  },
+  render: function() {
+    return (
+      <form className="commentForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="Your name" ref="author" />
+        <input type="text" placeholder="Say something..." ref="text" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+});
+
+ReactDOM.render(
+  <Post url="/api/comments" pollInterval={3000} />,
+  document.getElementById('content')
+); 
