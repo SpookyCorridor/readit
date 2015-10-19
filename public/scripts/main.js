@@ -57,3 +57,25 @@ var Post = React.createClass({
     );
   }
 });
+
+var CommentList = React.createClass({
+
+	
+	render: function() { 
+		var that = this; 
+		var com = []; 
+		for (var comment in sorted_comments) {
+  		if (current_parent === sorted_comments[comment].parentid) {		
+    		com.push(sorted_comments[comment]); 
+  		}
+  		current_parent = sorted_comments[comment].id; 
+  		console.log(current_parent)
+		}
+		
+		return (
+			<Comment author={comment.author} body={comment.text} key={index} id={comment.id} parentid={comment.parentid} actions={that.props.actions}>
+				{comment.text}
+			</Comment> 
+		);
+	}
+});
