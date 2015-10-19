@@ -79,3 +79,18 @@ var CommentList = React.createClass({
 		);
 	}
 });
+
+var Comment = React.createClass({
+  render: function() {
+    return (
+      <div className="comment">
+          <h4 className="commentAuthor">
+            {this.props.author}
+          </h4>
+          <span> {this.props.body} </span> 
+          <li> {this.props.subComments} </li> 
+          <CommentForm actions={this.props.actions} parentid={this.props.id} parentdepth={this.props.depth}></CommentForm> 
+      </div>     
+    );
+  }
+});
